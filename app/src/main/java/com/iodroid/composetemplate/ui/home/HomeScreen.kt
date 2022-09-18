@@ -31,6 +31,7 @@ fun HomeScreen(
             .padding(18.dp)
     ) {
         Button(onClick = {
+            viewModel.setValue()
             viewModel.getRemoteHotCoffee()
             navigator.navigate(ResultScreenDestination())
         }) {

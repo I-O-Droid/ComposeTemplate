@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.iodroid.composetemplate.data.local.repo.CoffeeLocalRepository
 import com.iodroid.composetemplate.data.models.Coffee
 import com.iodroid.composetemplate.data.remote.repo.CoffeeRemoteRepository
+import com.iodroid.composetemplate.data.sharedpreference.SharedPref
 import com.iodroid.composetemplate.utils.Constants.TAG
 import com.iodroid.composetemplate.utils.HttpRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CoffeeViewModel @Inject constructor(
     val remoteRepo: CoffeeRemoteRepository,
-    val localRepo: CoffeeLocalRepository
+    val localRepo: CoffeeLocalRepository,
+    val sharedPref: SharedPref
 ): ViewModel() {
 
     val remoteCoffeeStateFlow = MutableStateFlow(0)
@@ -78,6 +80,12 @@ class CoffeeViewModel @Inject constructor(
                 Coffee(id = 1)
             )
             getAllLocalCoffee()
+        }
+    }
+
+    fun setValue(){
+        viewModelScope.launch{
+            sharedPref.setValue("Coffee")
         }
     }
 }
