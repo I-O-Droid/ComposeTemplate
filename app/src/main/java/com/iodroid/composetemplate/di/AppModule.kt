@@ -3,6 +3,7 @@ package com.iodroid.composetemplate.di
 import android.content.Context
 import androidx.room.Room
 import com.iodroid.composetemplate.data.local.CoffeeDb
+import com.iodroid.composetemplate.data.sharedpreference.SharedPref
 import com.iodroid.composetemplate.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -47,4 +48,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideDao(coffeeDb: CoffeeDb) = coffeeDb.getCoffeeDao()
+
+    @Singleton
+    @Provides
+    fun provideSharedPreference(@ApplicationContext context: Context) = SharedPref(context)
 }
